@@ -200,82 +200,80 @@ function App() {
   }, [categoryChartData, monthlyTrendData, totalExpenses, totalIncome]);
 
   
-  return (
-    <>
-    
-    <TopHeader darkMode={darkMode} setDarkMode={setDarkMode} />
-    
-    <div className="layout_shell">
-      <Sidebar role={role} />
-     
-      <main className="main_content">
-        <section id="overview">
-          <Header
-            role={role}
-            setRole={setRole}
-            darkMode={darkMode}
-            setDarkMode={setDarkMode}
-          />
-        </section>
+ return (
+  <div className="layout_shell">
+    <Sidebar role={role} />
 
-        <section id="summary">
-          <SummaryCards
-            totalBalance={totalBalance}
-            totalIncome={totalIncome}
-            totalExpenses={totalExpenses}
-            transactionCount={transactions.length}
-          />
-        </section>
+    <main className="main_content">
+      <TopHeader darkMode={darkMode} setDarkMode={setDarkMode} />
 
-        <section id="charts" className="charts_grid">
-          <LineChartCard data={monthlyTrendData} />
-          <CategoryChartCard data={categoryChartData} />
-        </section>
+      <section id="overview">
+        <Header
+          role={role}
+          setRole={setRole}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+        />
+      </section>
 
-        <section id="insights" className="section_block">
-          <div className="section_heading">
-            <div>
-              <h2>Insights</h2>
-              <p>Simple observations from the finance data</p>
-            </div>
-            <div className="panel_badge">Auto Calculated</div>
+      <section id="summary">
+        <SummaryCards
+          totalBalance={totalBalance}
+          totalIncome={totalIncome}
+          totalExpenses={totalExpenses}
+          transactionCount={transactions.length}
+        />
+      </section>
+
+      <section id="charts" className="charts_grid">
+        <LineChartCard data={monthlyTrendData} />
+        <CategoryChartCard data={categoryChartData} />
+      </section>
+
+      <section id="insights" className="section_block">
+        <div className="section_heading">
+          <div>
+            <h2>Insights</h2>
+            <p>Simple observations from the finance data</p>
           </div>
-          <InsightsSection insights={insights} />
-        </section>
+          <div className="panel_badge">Auto Calculated</div>
+        </div>
+        <InsightsSection insights={insights} />
+      </section>
 
-        <section id="transactions">
-          {role === "admin" ? (
-            <TransactionForm
-              onAddTransaction={handleAddTransaction}
-              categoryOptions={categoryOptions}
-            />
-          ) : (
-            <div className="panel_card role_note better_role_note animated_card">
-              <div className="section_top">
-                <div>
-                  <h2>Viewer Mode Active</h2>
-                  <p>You can explore the dashboard but cannot change the transaction data.</p>
-                </div>
-                <div className="panel_badge">Read Only</div>
-              </div>
-            </div>
-          )}
-
-          <TransactionsSection
-            transactions={filteredTransactions}
-            filters={filters}
-            setFilters={setFilters}
-            onDeleteTransaction={handleDeleteTransaction}
-            role={role}
+      <section id="transactions">
+        {role === "admin" ? (
+          <TransactionForm
+            onAddTransaction={handleAddTransaction}
+            categoryOptions={categoryOptions}
           />
-        </section>
-        <footer className="footer_box">
-          <p>Made by Rahul Rajput • React + JavaScript + CSS</p>
-        </footer>
-      </main>
-    </div>
-    </>
-  );
+        ) : (
+          <div className="panel_card role_note better_role_note animated_card">
+            <div className="section_top">
+              <div>
+                <h2>Viewer Mode Active</h2>
+                <p>You can explore the dashboard but cannot change the transaction data.</p>
+              </div>
+              <div className="panel_badge">Read Only</div>
+            </div>
+          </div>
+        )}
+
+        <TransactionsSection
+          transactions={filteredTransactions}
+          filters={filters}
+          setFilters={setFilters}
+          onDeleteTransaction={handleDeleteTransaction}
+          role={role}
+        />
+      </section>
+
+      <footer className="footer_box">
+        <p>Made by Rahul Rajput • React + JavaScript + CSS</p>
+      </footer>
+    </main>
+  </div>
+);
 }
 
 export default App;
